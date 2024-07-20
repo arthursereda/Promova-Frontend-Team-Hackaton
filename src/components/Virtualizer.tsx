@@ -1,77 +1,77 @@
-import {useVirtualizer} from '@tanstack/react-virtual';
-import {FC, useRef} from 'react';
+import { useWindowVirtualizer } from '@tanstack/react-virtual';
+import { FC, useEffect, useRef } from 'react';
 
-import {DataItem} from '@/types/content';
+import { DataItem } from '@/types/content';
 
+import Progress from '@/components/Progress';
 import Switcher from '@/components/Switcher';
+import TopVideo from '@/components/TopVideo';
 
+import appendVidazoo from '@/utils/appendVidazoo';
 import useAutoScroll from '@/utils/useAutoScroll';
-import useWindowHeight from '@/utils/useWindowHeight';
-import Progress from "@/components/Progress";
+import useShowVideo from '@/utils/useShowVideo';
 
 interface MapperProps {
-    data: DataItem[];
+  data: DataItem[];
 }
 
-const Virtualizer: FC<MapperProps> = ({data}) => {
-    const parentRef = useRef(null);
-    useAutoScroll(parentRef);
+const Virtualizer: FC<MapperProps> = ({ data }) => {
+  const parentRef = useRef<HTMLDivElement>(null as HTMLDivElement);
+  useAutoScroll(parentRef);
 
-    const {windowHeight} = useWindowHeight();
-    const virtualizer = useVirtualizer({
-        count: data.length,
-        getScrollElement: () => parentRef.current,
-        estimateSize: () => 500,
-        overscan: 10,
-    });
+  const virtualizer = useWindowVirtualizer({
+    count: 10000,
+    estimateSize: () => 35,
+    overscan: 10,
+    scrollMargin: parentRef.current?.offsetTop ?? 0,
+  });
+  const isShowVideo = useShowVideo();
 
-    let offset = virtualizer.scrollOffset || 0
-    let size = virtualizer.getTotalSize()
+  let offset = virtualizer.scrollOffset || 0;
+  let size = virtualizer.getTotalSize();
 
-    let scrollProgress = (offset / size) * 100
+  let scrollProgress = (offset / size) * 100;
 
-    return (
-        <>
-            <Progress width={scrollProgress}/>
+  useEffect(() => {
+    appendVidazoo('vidazoo');
+  }, []);
+
+  return (
+    <>
+      {!isShowVideo && <TopVideo />}
+      <Progress width={scrollProgress} />
+      <div ref={parentRef} className="scrollbar-custom">
+        <div
+          style={{
+            height: `${virtualizer.getTotalSize()}px`,
+            width: '100%',
+            position: 'relative',
+          }}
+        >
+          {virtualizer.getVirtualItems().map((virtualItem) => (
             <div
-                ref={parentRef}
-                style={{
-                    height: windowHeight,
-                    overflowY: 'auto',
-                }}
-                className="scrollbar-custom"
+              key={virtualItem.key}
+              ref={(el) => {
+                if (el) {
+                  virtualItem.measureElement(el);
+                  new ResizeObserver(() => virtualItem.measureElement(el)).observe(el);
+                }
+              }}
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                transform: `translateY(${virtualItem.start}px)`,
+              }}
             >
-                <div
-                    style={{
-                        height: `${virtualizer.getTotalSize()}px`,
-                        width: '100%',
-                        position: 'relative',
-                    }}
-                >
-                    {virtualizer.getVirtualItems().map((virtualItem) => (
-                        <div
-                            key={virtualItem.key}
-                            ref={(el) => {
-                                if (el) {
-                                    virtualItem.measureElement(el);
-                                    new ResizeObserver(() => virtualItem.measureElement(el)).observe(el);
-                                }
-                            }}
-                            style={{
-                                position: 'absolute',
-                                top: 0,
-                                left: 0,
-                                width: '100%',
-                                transform: `translateY(${virtualItem.start}px)`,
-                            }}
-                        >
-                            <Switcher item={data[virtualItem.index]}/>
-                        </div>
-                    ))}
-                </div>
+              <Switcher item={data[virtualItem.index]} />
             </div>
-        </>
-    );
+          ))}
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default Virtualizer;
