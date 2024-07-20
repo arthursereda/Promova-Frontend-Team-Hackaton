@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import {
   AdvItem,
@@ -32,13 +32,13 @@ const Switcher: FC<Props> = ({ item }) => {
         clearInterval(intervalPBJSCustom);
 
         // @ts-ignore
-        setPbjsInstance(window.pbjs)
+        setPbjsInstance(window.pbjs);
       }
-    }, 1000)
+    }, 1000);
 
     return () => {
-      clearInterval(intervalPBJSCustom)
-    }
+      clearInterval(intervalPBJSCustom);
+    };
   }, []);
 
   switch (item?.type) {

@@ -18,7 +18,7 @@ const App = ({ Component, pageProps }: AppProps) => (
     <Script async src="https://cdn.amoanimals.com/prebiders/65df2430c6119531530487.js" />
     <Script async src="https://unpkg.com/embedo/embedo.min.js" />
     <Script
-            id="vidazoo-script"
+      id="vidazoo-script"
       strategy="beforeInteractive"
       dangerouslySetInnerHTML={{
         __html: `
@@ -28,12 +28,11 @@ const App = ({ Component, pageProps }: AppProps) => (
       vidazoo.setAttribute("data-widget-id", "5f7c82bd819a8b00049dd9d6");
       document.getElementById("vidazoo").appendChild(vidazoo);
       `,
-            }}
-
-            async
-        />
-        <Component {...pageProps} />
-    </>
+      }}
+      async
+    />
+    <Component {...pageProps} />
+  </>
 );
 
 export default App;

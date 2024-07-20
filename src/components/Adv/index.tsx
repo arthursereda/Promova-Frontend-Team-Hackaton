@@ -15,10 +15,10 @@ const Adv: FC<Props> = ({ id, pbjsInstance }) => {
 
             // @ts-ignore
             const target = googletag
-            .pubads()
-            .getSlots()
-            // @ts-ignore
-            .find((slot) => slot.getSlotElementId() === id);
+              .pubads()
+              .getSlots()
+              // @ts-ignore
+              .find((slot) => slot.getSlotElementId() === id);
 
             // @ts-ignore
             target && googletag.pubads().refresh([target]);
@@ -28,7 +28,7 @@ const Adv: FC<Props> = ({ id, pbjsInstance }) => {
     }
   }, [pbjsInstance]);
 
-  return <div id={id} data-slot-type={1} />
+  return <div id={id} data-slot-type={1} />;
 };
 
 export default Adv;
