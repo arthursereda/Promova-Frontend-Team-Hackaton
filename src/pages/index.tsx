@@ -14,13 +14,14 @@ type Props = {
 const Home: NextPage<Props> = ({data}) => {
     return (
         <main
-            className={` light w-full ${inter.className}`}
+            className={`w-full ${inter.className}`}
         >
-            <article className="ml-auto mr-auto prose prose-slate lg:prose-xl xl:prose-xl 2xl:prose-2xl">
+            <article
+                className="ml-auto mr-auto prose prose-slate lg:prose-xl xl:prose-xl 2xl:prose-2xl dark:prose-invert prose-img:rounded-xl prose-video:rounded-xl  prose-a:text-blue-600">
                 <Mapper data={data}/>
             </article>
         </main>
-);
+    );
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
