@@ -8,8 +8,8 @@ const appendVidazoo = (id: string) => {
     if (vidazoo) {
       clearInterval(intervalVidazoo);
 
-      if (!document.getElementById(id).childNodes.length) {
-        document.getElementById(id).appendChild(vidazoo);
+      if (!document?.getElementById(id)?.childNodes?.length) {
+        document?.getElementById(id)?.appendChild(vidazoo);
       }
     }
   }, 1000);
