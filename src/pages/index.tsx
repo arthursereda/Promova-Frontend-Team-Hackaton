@@ -1,5 +1,6 @@
 import { GetServerSideProps, NextPage } from 'next';
 import { Inter } from 'next/font/google';
+import Script from 'next/script';
 
 import { ArticleResponse, DataItem } from '@/types/content';
 
@@ -23,6 +24,7 @@ const Home: NextPage<Props> = ({ data }) => {
       <ArticleWrapper>
         <Mapper data={data} />
       </ArticleWrapper>
+      <Script async src="https://cdn.amomama.de/hackathon/scripts/adv.min.js" />
     </main>
   );
 };

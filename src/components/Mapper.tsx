@@ -8,12 +8,14 @@ interface MapperProps {
   data: DataItem[];
 }
 
-const Mapper: FC<MapperProps> = ({ data }) => (
-  <div>
-    {data.map((item, index) => (
-      <Switcher item={item} key={index} />
-    ))}
-  </div>
-);
+const Mapper: FC<MapperProps> = ({ data }) => {
+  return (
+    <div>
+      {data.map((item, index) => (
+        <Switcher item={item} key={index} />
+      ))}
+    </div>
+  );
+};
 
 export default Mapper;

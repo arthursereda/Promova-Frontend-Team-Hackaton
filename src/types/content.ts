@@ -29,6 +29,7 @@ export interface ParagraphItem extends DataItemBase {
 export interface AdvItem extends DataItemBase {
   type: DataType.Adv;
   id: string;
+  pbjsInstance?: any;
 }
 
 export interface VideoItem extends DataItemBase {
