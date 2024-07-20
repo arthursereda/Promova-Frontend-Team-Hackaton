@@ -19,6 +19,7 @@ const App = ({ Component, pageProps }: AppProps) => (
         <Script async src="https://unpkg.com/embedo/embedo.min.js"/>
         <Script src="https://cdn.amomama.de/hackathon/scripts/adv.min.js"/>
         <Script
+            id="vidazoo-script"
             dangerouslySetInnerHTML={{
                 __html: `
                   const vidazoo = document.createElement("script");
