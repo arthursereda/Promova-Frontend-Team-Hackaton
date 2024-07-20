@@ -15,7 +15,6 @@ const Mapper: FC<MapperProps> = ({ data }) =>
     (
         <div>
             {data.map((item, index) => {
-                // return <div key={index}>{item.type}</div>
                 switch (item.type) {
                     case DataType.Image:
                         return <Image key={index} src={(item as ImageItem).src}/>;
