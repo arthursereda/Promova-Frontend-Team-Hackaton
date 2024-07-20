@@ -27,25 +27,6 @@ const App = ({ Component, pageProps }: AppProps) => {
       <Script async src="//www.googletagservices.com/tag/js/gpt.js" />
       <Script async src="https://cdn.amoanimals.com/prebiders/65df2430c6119531530487.js" />
       <Script async src="https://unpkg.com/embedo/embedo.min.js" />
-      <Script
-        id="vidazoo-script"
-        dangerouslySetInnerHTML={{
-          __html: `
-      const vidazoo = document.createElement("script");
-      vidazoo.async = true;
-      vidazoo.src = "https://static.vidazoo.com/basev/vwpt.js";
-      vidazoo.setAttribute("data-widget-id", "5f7c82bd819a8b00049dd9d6");
-      
-       const intervalVidazoo = setInterval(() => {
-      if (vidazoo) {
-        clearInterval(intervalVidazoo);
-
-        document.getElementById("vidazoo").appendChild(vidazoo);
-      }
-    }, 1000);
-      `,
-        }}
-      />
       <Component {...pageProps} />
     </>
   );
