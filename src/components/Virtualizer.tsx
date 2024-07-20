@@ -5,13 +5,15 @@ import { DataItem } from '@/types/content';
 
 import Switcher from '@/components/Switcher';
 
+import useWindowHeight from '@/utils/useWindowHeight';
+
 interface MapperProps {
   data: DataItem[];
 }
 
 const Virtualizer: FC<MapperProps> = ({ data }) => {
   const parentRef = useRef(null);
-
+  const { windowHeight } = useWindowHeight();
   const virtualizer = useVirtualizer({
     count: data.length,
     getScrollElement: () => parentRef.current,
@@ -19,7 +21,14 @@ const Virtualizer: FC<MapperProps> = ({ data }) => {
   });
 
   return (
-    <div ref={parentRef}>
+    <div
+      ref={parentRef}
+      style={{
+        height: windowHeight,
+        overflowY: 'auto',
+      }}
+      className="scrollbar-custom"
+    >
       <div
         style={{
           height: `${virtualizer.getTotalSize()}px`,
