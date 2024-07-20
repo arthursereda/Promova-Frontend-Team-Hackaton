@@ -1,13 +1,35 @@
-import { Inter } from "next/font/google";
+import {Inter} from "next/font/google";
+import {GetServerSideProps, NextPage,} from "next";
+import {ARTICLE_URL} from "@/config/constants/urls";
+import Mapper from "@/components/Mapper";
+import {ArticleResponse, DataItem} from "@/types/content";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({subsets: ["latin"]});
 
-export default function Home() {
-  return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      Hello, Promova!
-    </main>
-  );
+
+type Props = {
+    data: DataItem[]
 }
+
+const Home: NextPage<Props> = ({data}) => {
+    return (
+        <main
+            className={`${inter.className}`}
+        >
+            <Mapper data={data} />
+        </main>
+    );
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+    const res = await fetch(ARTICLE_URL);
+    const data: ArticleResponse = await res.json();
+
+    return {
+        props: {
+            data: data?.data
+        },
+    };
+}
+
+export default Home;
