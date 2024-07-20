@@ -5,6 +5,7 @@ import { DataItem } from '@/types/content';
 
 import Switcher from '@/components/Switcher';
 
+import useAutoScroll from '@/utils/useAutoScroll';
 import useWindowHeight from '@/utils/useWindowHeight';
 
 interface MapperProps {
@@ -19,6 +20,8 @@ const Virtualizer: FC<MapperProps> = ({ data }) => {
     getScrollElement: () => parentRef.current,
     estimateSize: () => 500,
   });
+
+  useAutoScroll(parentRef);
 
   return (
     <div
