@@ -17,6 +17,7 @@ const Virtualizer: FC<MapperProps> = ({ data }) => {
     getScrollElement: () => parentRef.current,
     estimateSize: () => 500,
   });
+
   return (
     <div ref={parentRef}>
       <div
@@ -29,14 +30,18 @@ const Virtualizer: FC<MapperProps> = ({ data }) => {
         {virtualizer.getVirtualItems().map((virtualItem) => (
           <div
             key={virtualItem.key}
-            ref={virtualItem.measureElement} // вимірювання висоти елемента
+            ref={(el) => {
+              if (el) {
+                virtualItem.measureElement(el);
+                new ResizeObserver(() => virtualItem.measureElement(el)).observe(el);
+              }
+            }}
             style={{
               position: 'absolute',
               top: 0,
               left: 0,
               width: '100%',
               transform: `translateY(${virtualItem.start}px)`,
-              borderBottom: '1px solid lightgray',
             }}
           >
             <Switcher item={data[virtualItem.index]} />
