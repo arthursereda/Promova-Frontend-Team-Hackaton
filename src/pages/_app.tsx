@@ -19,7 +19,6 @@ const App = ({ Component, pageProps }: AppProps) => (
     <Script async src="https://unpkg.com/embedo/embedo.min.js" />
     <Script
       id="vidazoo-script"
-      strategy="beforeInteractive"
       dangerouslySetInnerHTML={{
         __html: `
       const vidazoo = document.createElement("script");
@@ -29,7 +28,6 @@ const App = ({ Component, pageProps }: AppProps) => (
       document.getElementById("vidazoo").appendChild(vidazoo);
       `,
       }}
-      async
     />
     <Component {...pageProps} />
   </>
