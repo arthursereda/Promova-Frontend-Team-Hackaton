@@ -1,17 +1,18 @@
-import {FC} from "react";
-import Switcher from "@/components/Switcher";
-import {DataItem} from "@/types/content";
+import { FC } from 'react';
+
+import { DataItem } from '@/types/content';
+
+import Switcher from '@/components/Switcher';
 
 interface MapperProps {
   data: DataItem[];
 }
 
 const Mapper: FC<MapperProps> = ({ data }) => (
-
-        <div>
-            {data.map((item, index) =>
-              <Switcher item={item} key={index}/>
-    )}
+  <div>
+    {data.map((item, index) => (
+      <Switcher item={item} key={index} />
+    ))}
   </div>
 );
 
