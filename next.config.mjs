@@ -2,10 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    loader: 'default',
-    domains: [
-      'localhost',
-      'imgproxy.amomama.de'
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
     ],
   },
 };
