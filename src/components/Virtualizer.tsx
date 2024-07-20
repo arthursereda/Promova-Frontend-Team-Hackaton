@@ -20,7 +20,7 @@ const Virtualizer: FC<MapperProps> = ({ data }) => {
   useAutoScroll(parentRef);
 
   const virtualizer = useWindowVirtualizer({
-    count: 10000,
+    count: data.length,
     estimateSize: () => 35,
     overscan: 10,
     scrollMargin: parentRef.current?.offsetTop ?? 0,
