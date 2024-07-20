@@ -24,7 +24,6 @@ const Home: NextPage<Props> = ({ data }) => {
       <ArticleWrapper>
         <Mapper data={data} />
       </ArticleWrapper>
-      <Script async src="https://cdn.amomama.de/hackathon/scripts/adv.min.js" />
     </main>
   );
 };
