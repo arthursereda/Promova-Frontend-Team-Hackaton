@@ -17,7 +17,7 @@ interface MapperProps {
 
 const Virtualizer: FC<MapperProps> = ({ data }) => {
   const parentRef = useRef<HTMLDivElement | null>(null);
-  useAutoScroll(parentRef);
+  useAutoScroll();
 
   const virtualizer = useWindowVirtualizer({
     count: data.length,
