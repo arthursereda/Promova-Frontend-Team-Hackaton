@@ -18,7 +18,6 @@ const Virtualizer: FC<MapperProps> = ({ data }) => {
     count: data.length,
     getScrollElement: () => parentRef.current,
     estimateSize: () => 500,
-    overscan: 100,
   });
 
   return (
