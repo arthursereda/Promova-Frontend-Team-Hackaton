@@ -8,6 +8,7 @@ import Mapper from '@/components/Mapper';
 
 import { ARTICLE_URL } from '@/config/constants/urls';
 import Script from "next/script";
+import useAutoScroll from '@/utils/useAutoScroll';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -16,6 +17,8 @@ type Props = {
 };
 
 const Home: NextPage<Props> = ({ data }) => {
+  useAutoScroll();
+
   return (
     <main className={`w-full ${inter.className}`}>
       <ArticleWrapper>
