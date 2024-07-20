@@ -6,7 +6,7 @@ const UseAutoScroll = (ref?: RefObject<Element>) => {
 
   useEffect(() => {
     const scrollAmount = 1;
-    const scrollInterval = 50;
+    const scrollInterval = 30;
     let intervalId: NodeJS.Timeout;
 
     if (query?.scroll === 'true') {
