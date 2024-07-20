@@ -36,7 +36,7 @@ const Adv: FC<Props> = ({ id, pbjsInstance }) => {
     }
   }, [pbjsInstance]);
 
-  return <div id={id} data-slot-type={1} />;
+  return <div id={id} data-slot-type={1}  className="w-[320px] h-[100px]"/>;
 };
 
 export default Adv;
