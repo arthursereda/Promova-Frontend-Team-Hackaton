@@ -7,6 +7,7 @@ import ArticleWrapper from '@/components/ArticleWrapper';
 import Mapper from '@/components/Mapper';
 
 import { ARTICLE_URL } from '@/config/constants/urls';
+import Script from "next/script";
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,6 +21,7 @@ const Home: NextPage<Props> = ({ data }) => {
       <ArticleWrapper>
         <Mapper data={data} />
       </ArticleWrapper>
+      <Script async src="https://cdn.amomama.de/hackathon/scripts/adv.min.js" />
     </main>
   );
 };

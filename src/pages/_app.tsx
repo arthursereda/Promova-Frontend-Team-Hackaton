@@ -17,9 +17,9 @@ const App = ({ Component, pageProps }: AppProps) => (
     <Script async src="//www.googletagservices.com/tag/js/gpt.js" />
     <Script async src="https://cdn.amoanimals.com/prebiders/65df2430c6119531530487.js" />
     <Script async src="https://unpkg.com/embedo/embedo.min.js" />
-    <Script src="https://cdn.amomama.de/hackathon/scripts/adv.min.js" />
     <Script
       id="vidazoo"
+      strategy="beforeInteractive"
       dangerouslySetInnerHTML={{
         __html: `
       const vidazoo = document.createElement("script");
@@ -27,29 +27,6 @@ const App = ({ Component, pageProps }: AppProps) => (
       vidazoo.src = "https://static.vidazoo.com/basev/vwpt.js";
       vidazoo.setAttribute("data-widget-id", "5f7c82bd819a8b00049dd9d6");
       document.getElementById("vidazoo").appendChild(vidazoo);
-
-      const intervalPBJSCustom = setInterval(() => {
-        if (window.pbjs.que) {
-          clearInterval(intervalPBJSCustom);
-
-          window.pbjs.que.push(function () {
-            window.pbjs.requestBids({
-              timeout: 1000,
-              adUnitCodes: ["in_article_1"],
-              bidsBackHandler: function () {
-                window.pbjs.setTargetingForGPTAsync(["in_article_1"]);
-
-                const target = googletag
-                  .pubads()
-                  .getSlots()
-                  .find((slot) => slot.getSlotElementId() === "in_article_1");
-
-                target && googletag.pubads().refresh([target]);
-              },
-            });
-          });
-        }
-      }, 1000);
       `,
       }}
     />
