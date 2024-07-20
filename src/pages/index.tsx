@@ -1,42 +1,48 @@
-import { GetServerSideProps, NextPage } from 'next';
-import { Inter } from 'next/font/google';
+import {GetServerSideProps, NextPage} from 'next';
+import {Inter} from 'next/font/google';
 import Script from 'next/script';
 
-import { ArticleResponse, DataItem } from '@/types/content';
+import {ArticleResponse, DataItem} from '@/types/content';
 
 import ArticleWrapper from '@/components/ArticleWrapper';
 import Mapper from '@/components/Mapper';
 
-import { ARTICLE_URL } from '@/config/constants/urls';
+import {ARTICLE_URL} from '@/config/constants/urls';
 import useAutoScroll from '@/utils/useAutoScroll';
+import {useEffect, useState} from "react";
+import useScrollProgress from "@/components/hooks/useScrollProgress";
+import Progress from "@/components/Progress";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({subsets: ['latin']});
 
 type Props = {
-  data: DataItem[];
+    data: DataItem[];
 };
 
-const Home: NextPage<Props> = ({ data }) => {
-  useAutoScroll();
+const Home: NextPage<Props> = ({data}) => {
+    useAutoScroll();
 
-  return (
-    <main className={`w-full ${inter.className}`}>
-      <ArticleWrapper>
-        <Mapper data={data} />
-      </ArticleWrapper>
-    </main>
-  );
+    const {scrollProgress} = useScrollProgress()
+
+    return (
+        <main className={`w-full ${inter.className}`}>
+            <Progress width={scrollProgress}/>
+            <ArticleWrapper>
+                <Mapper data={data}/>
+            </ArticleWrapper>
+        </main>
+    );
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await fetch(ARTICLE_URL);
-  const data: ArticleResponse = await res.json();
+    const res = await fetch(ARTICLE_URL);
+    const data: ArticleResponse = await res.json();
 
-  return {
-    props: {
-      data: data?.data,
-    },
-  };
+    return {
+        props: {
+            data: data?.data,
+        },
+    };
 };
 
 export default Home;
