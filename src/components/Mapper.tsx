@@ -3,16 +3,16 @@ import Switcher from "@/components/Switcher";
 import {DataItem} from "@/types/content";
 
 interface MapperProps {
-    data: DataItem[];
+  data: DataItem[];
 }
 
-const Mapper: FC<MapperProps> = ({ data }) =>
-    (
+const Mapper: FC<MapperProps> = ({ data }) => (
+
         <div>
             {data.map((item, index) =>
               <Switcher item={item} key={index}/>
-            )}
-        </div>
-    );
+    )}
+  </div>
+);
 
 export default Mapper;
