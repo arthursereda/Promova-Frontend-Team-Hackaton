@@ -18,15 +18,17 @@ const App = ({ Component, pageProps }: AppProps) => {
     <>
       <Script is="quantcast" src="https://cdn.amomama.de/hackathon/scripts/quantcast.min.js" />
       <Script
-        async
+        strategy="afterInteractive"
         data-cfasync="false"
         crossOrigin="anonymous"
         src="https://static.kueezrtb.com/latest.js"
         id="kueezrtb_latest"
       />
-      <Script async src="//www.googletagservices.com/tag/js/gpt.js" />
-      <Script async src="https://cdn.amoanimals.com/prebiders/65df2430c6119531530487.js" />
-      <Script async src="https://unpkg.com/embedo/embedo.min.js" />
+      <Script strategy="afterInteractive" src="//www.googletagservices.com/tag/js/gpt.js" />
+      <Script
+        strategy="afterInteractive"
+        src="https://cdn.amoanimals.com/prebiders/65df2430c6119531530487.js"
+      />
       <Component {...pageProps} />
     </>
   );
