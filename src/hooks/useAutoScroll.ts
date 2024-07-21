@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { RefObject, useEffect } from 'react';
 
-const UseAutoScroll = (ref?: RefObject<Element>) => {
+const useAutoScroll = (ref?: RefObject<Element>) => {
   const { query } = useRouter();
 
   useEffect(() => {
@@ -20,4 +20,4 @@ const UseAutoScroll = (ref?: RefObject<Element>) => {
   }, [query?.scroll, ref]);
 };
 
-export default UseAutoScroll;
+export default useAutoScroll;
