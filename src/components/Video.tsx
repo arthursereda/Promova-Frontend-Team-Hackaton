@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
-const Video: FC = () => <div id="vidazoo" />;
+import { VideoItem } from '@/types/content';
+
+const Video: FC<VideoItem> = ({ id }) => <div id={id} />;
 
 export default Video;

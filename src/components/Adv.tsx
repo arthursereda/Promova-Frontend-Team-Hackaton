@@ -1,17 +1,20 @@
-// Adv.js
 import { FC, useEffect } from 'react';
 
 import { AdvItem } from '@/types/content';
 
-import { addAdUnits, div_1_sizes, loadAd } from '@/utils/advertisement';
+import { addAdUnits, loadAd } from '@/utils/advertisement';
 
-type Props = Omit<AdvItem, 'type'>;
+declare global {
+  interface Window {
+    googletag: any;
+  }
+}
 
-const Adv: FC<Props> = ({ id, pbjsInstance }) => {
+const Adv: FC<AdvItem> = ({ id, pbjsInstance }) => {
   useEffect(() => {
     if (pbjsInstance?.que) {
       pbjsInstance.que.push(() => {
-        addAdUnits(pbjsInstance, id, div_1_sizes);
+        addAdUnits(pbjsInstance, id);
 
         pbjsInstance.requestBids({
           timeout: 1000,
@@ -19,22 +22,19 @@ const Adv: FC<Props> = ({ id, pbjsInstance }) => {
           bidsBackHandler: function () {
             pbjsInstance.setTargetingForGPTAsync([id]);
 
-            // @ts-ignore
-            const target = googletag
+            const target = window.googletag
               .pubads()
               .getSlots()
-              // @ts-ignore
-              .find((slot) => slot.getSlotElementId() === id);
+              .find((slot: any) => slot.getSlotElementId() === id);
 
-            // @ts-ignore
-            target && googletag.pubads().refresh([target]);
+            target && window.googletag.pubads().refresh([target]);
           },
         });
       });
 
       loadAd(id);
     }
-  }, [pbjsInstance]);
+  }, [id, pbjsInstance]);
 
   return <div id={id} data-slot-type={1} />;
 };

@@ -7,43 +7,42 @@ export enum DataType {
   Embed = 'embed',
 }
 
-export interface DataItemBase {
-  type: DataType;
-}
+export type TitleItem = {
+  content: string;
+};
 
-export interface ImageItem extends DataItemBase {
-  type: DataType.Image;
+export type ImageItem = {
   src: string;
-}
+};
 
-export interface TitleItem extends DataItemBase {
-  type: DataType.Title;
+export type ParagraphItem = {
   content: string;
-}
+};
 
-export interface ParagraphItem extends DataItemBase {
-  type: DataType.Paragraph;
-  content: string;
-}
-
-export interface AdvItem extends DataItemBase {
-  type: DataType.Adv;
+export type AdvItem = {
   id: string;
   pbjsInstance?: any;
-}
+};
 
-export interface VideoItem extends DataItemBase {
-  type: DataType.Video;
+export type VideoItem = {
   id: string;
-}
+};
 
-export interface EmbedItem extends DataItemBase {
-  type: DataType.Embed;
+export type EmbedItem = {
   url: string;
-}
+};
+
+export type ArticleItem = {
+  type: DataType;
+} & TitleItem &
+  ImageItem &
+  ParagraphItem &
+  AdvItem &
+  VideoItem &
+  EmbedItem;
 
 export type DataItem = ImageItem | TitleItem | ParagraphItem | AdvItem | VideoItem | EmbedItem;
 
 export interface ArticleResponse {
-  data: DataItem[];
+  data: ArticleItem[];
 }

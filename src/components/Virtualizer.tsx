@@ -1,7 +1,7 @@
 import { useWindowVirtualizer } from '@tanstack/react-virtual';
 import { FC, useEffect, useRef } from 'react';
 
-import { DataItem } from '@/types/content';
+import { ArticleItem, DataItem } from '@/types/content';
 
 import Progress from '@/components/Progress';
 import Switcher from '@/components/Switcher';
@@ -11,28 +11,27 @@ import useAutoScroll from '@/hooks/useAutoScroll';
 import useShowVideo from '@/hooks/useShowVideo';
 import appendVidazoo from '@/utils/appendVidazoo';
 
-type MapperProps = {
-  data: DataItem[];
-};
+interface MapperProps {
+  data: ArticleItem[];
+}
 
 const SIZE_OFFSET_TO_FILL_PROGRESS = 720;
 
 const Virtualizer: FC<MapperProps> = ({ data }) => {
-  const parentRef = useRef<HTMLDivElement | null>(null);
   useAutoScroll();
 
+  const parentRef = useRef<HTMLDivElement | null>(null);
   const virtualizer = useWindowVirtualizer({
     count: data.length,
     estimateSize: () => 35,
-    overscan: 10,
+    overscan: 5,
     scrollMargin: parentRef.current?.offsetTop ?? 0,
   });
   const isShowVideo = useShowVideo();
 
-  let offset = virtualizer.scrollOffset || 0;
-  let size = virtualizer.getTotalSize() - SIZE_OFFSET_TO_FILL_PROGRESS;
-
-  let scrollProgress = (offset / size) * 100;
+  const offset = virtualizer.scrollOffset || 0;
+  const size = virtualizer.getTotalSize() - SIZE_OFFSET_TO_FILL_PROGRESS;
+  const scrollProgress = (offset / size) * 100;
 
   useEffect(() => {
     appendVidazoo('vidazoo');

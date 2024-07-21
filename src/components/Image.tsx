@@ -3,8 +3,7 @@ import { FC } from 'react';
 
 import { ImageItem } from '@/types/content';
 
-type Props = Omit<ImageItem, 'type'>;
-const Image: FC<Props> = ({ src }) => (
+const Image: FC<ImageItem> = ({ src }) => (
   <figure className="relative rounded-lg overflow-hidden m-4">
     <NextImage src={src} alt="Content" width={500} height={500} />
   </figure>

@@ -1,61 +1,22 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 
-import {
-  AdvItem,
-  DataItem,
-  DataType,
-  EmbedItem,
-  ImageItem,
-  ParagraphItem,
-  TitleItem,
-} from '@/types/content';
+import { ArticleItem } from '@/types/content';
 
-import Adv from '@/components/Adv';
-import Embed from '@/components/Embed';
-import Image from '@/components/Image';
-import Paragraph from '@/components/Paragraph';
-import Title from '@/components/Title';
-import Video from '@/components/Video';
+import { articleComponents } from '@/constants/sections';
+import { usePBJSInstance } from '@/hooks/usePBJSInstance';
 
 type Props = {
-  item: DataItem;
+  item: ArticleItem;
 };
 
 const Switcher: FC<Props> = ({ item }) => {
-  const [pbjsInstance, setPbjsInstance] = useState(null);
+  const pbjsInstance = usePBJSInstance();
 
-  useEffect(() => {
-    const intervalPBJSCustom = setInterval(() => {
-      // @ts-ignore
-      if (window?.pbjs) {
-        clearInterval(intervalPBJSCustom);
+  const Component = articleComponents?.[item?.type];
 
-        // @ts-ignore
-        setPbjsInstance(window.pbjs);
-      }
-    }, 1000);
+  if (!articleComponents) return null;
 
-    return () => {
-      clearInterval(intervalPBJSCustom);
-    };
-  }, []);
-
-  switch (item?.type) {
-    case DataType.Image:
-      return <Image src={(item as ImageItem).src} />;
-    case DataType.Title:
-      return <Title content={(item as TitleItem).content} />;
-    case DataType.Paragraph:
-      return <Paragraph content={(item as ParagraphItem).content} />;
-    case DataType.Adv:
-      return <Adv id={(item as AdvItem).id} pbjsInstance={pbjsInstance} />;
-    case DataType.Video:
-      return <Video />;
-    case DataType.Embed:
-      return <Embed url={(item as EmbedItem).url} />;
-    default:
-      return null;
-  }
+  return <Component {...item} pbjsInstance={pbjsInstance} />;
 };
 
 export default Switcher;

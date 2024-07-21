@@ -18,7 +18,7 @@ export const loadAd = (name) => {
   });
 };
 
-export const addAdUnits = (pbjsInstance, id, div_1_sizes) => {
+export const addAdUnits = (pbjsInstance, id) => {
   const adUnit = {
     code: id,
     mediaTypes: {

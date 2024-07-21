@@ -1,18 +1,11 @@
 import { AppProps } from 'next/app';
 import Script from 'next/script';
-import { useEffect } from 'react';
 
+import useFirstVisit from '@/hooks/useFirstVisit';
 import '@/styles/globals.css';
 
 const App = ({ Component, pageProps }: AppProps) => {
-  useEffect(() => {
-    if (sessionStorage.getItem('firstVisit') === 'true') {
-      alert('RELOAD!');
-      sessionStorage.removeItem('firstVisit');
-    }
-
-    sessionStorage.setItem('firstVisit', 'true');
-  }, []);
+  useFirstVisit();
 
   return (
     <>
