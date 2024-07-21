@@ -11,9 +11,11 @@ import useAutoScroll from '@/hooks/useAutoScroll';
 import useShowVideo from '@/hooks/useShowVideo';
 import appendVidazoo from '@/utils/appendVidazoo';
 
-interface MapperProps {
+type MapperProps = {
   data: DataItem[];
-}
+};
+
+const SIZE_OFFSET_TO_FILL_PROGRESS = 720;
 
 const Virtualizer: FC<MapperProps> = ({ data }) => {
   const parentRef = useRef<HTMLDivElement | null>(null);
@@ -28,7 +30,7 @@ const Virtualizer: FC<MapperProps> = ({ data }) => {
   const isShowVideo = useShowVideo();
 
   let offset = virtualizer.scrollOffset || 0;
-  let size = virtualizer.getTotalSize();
+  let size = virtualizer.getTotalSize() - SIZE_OFFSET_TO_FILL_PROGRESS;
 
   let scrollProgress = (offset / size) * 100;
 
@@ -40,7 +42,7 @@ const Virtualizer: FC<MapperProps> = ({ data }) => {
     <>
       {!isShowVideo && <TopVideo />}
       <Progress width={scrollProgress} />
-      <div ref={parentRef} className="scrollbar-custom">
+      <div ref={parentRef}>
         <div
           style={{
             height: `${virtualizer.getTotalSize()}px`,
@@ -57,6 +59,7 @@ const Virtualizer: FC<MapperProps> = ({ data }) => {
                   new ResizeObserver(() => virtualItem.measureElement(el)).observe(el);
                 }
               }}
+              data-index={virtualItem.index}
               style={{
                 position: 'absolute',
                 top: 0,
