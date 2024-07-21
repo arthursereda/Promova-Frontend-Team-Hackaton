@@ -16,7 +16,11 @@ const App = ({ Component, pageProps }: AppProps) => {
 
   return (
     <>
-      <Script is="quantcast" src="https://cdn.amomama.de/hackathon/scripts/quantcast.min.js" />
+      <Script
+        strategy="afterInteractive"
+        is="quantcast"
+        src="https://cdn.amomama.de/hackathon/scripts/quantcast.min.js"
+      />
       <Script
         strategy="afterInteractive"
         data-cfasync="false"
