@@ -1,8 +1,11 @@
+import { VIDAZOO_WIDGET_ID } from '@/config/constants/keys';
+import { VIDAZOO_PLAYER_URL } from '@/config/constants/urls';
+
 const appendVidazoo = (id: string) => {
   const vidazoo = document.createElement('script');
   vidazoo.async = true;
-  vidazoo.src = 'https://static.vidazoo.com/basev/vwpt.js';
-  vidazoo.setAttribute('data-widget-id', '5f7c82bd819a8b00049dd9d6');
+  vidazoo.src = VIDAZOO_PLAYER_URL;
+  vidazoo.setAttribute('data-widget-id', VIDAZOO_WIDGET_ID);
 
   const intervalVidazoo = setInterval(() => {
     if (vidazoo) {
