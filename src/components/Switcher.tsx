@@ -8,7 +8,6 @@ import {
   ImageItem,
   ParagraphItem,
   TitleItem,
-  VideoItem,
 } from '@/types/content';
 
 import Adv from '@/components/Adv';
@@ -51,7 +50,7 @@ const Switcher: FC<Props> = ({ item }) => {
     case DataType.Adv:
       return <Adv id={(item as AdvItem).id} pbjsInstance={pbjsInstance} />;
     case DataType.Video:
-      return <Video id={(item as VideoItem).id} />;
+      return <Video />;
     case DataType.Embed:
       return <Embed url={(item as EmbedItem).url} />;
     default:
