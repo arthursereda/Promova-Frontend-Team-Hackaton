@@ -2,6 +2,7 @@ import { FC } from 'react';
 
 import { ParagraphItem } from '@/types/content';
 
-const Paragraph: FC<ParagraphItem> = ({ content }) => <p>{content}</p>;
+type Props = Omit<ParagraphItem, 'type'>;
+const Paragraph: FC<Props> = ({ content }) => <p>{content}</p>;
 
 export default Paragraph;

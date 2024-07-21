@@ -8,7 +8,7 @@ const nextConfig = {
       },
     ],
   },
-  transpilePackages: ['react-tweet'],
+  transpilePackages: ['react-tweet']
 };
 
 export default nextConfig;

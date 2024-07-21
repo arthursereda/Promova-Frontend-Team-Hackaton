@@ -3,9 +3,14 @@ import { Tweet } from 'react-tweet';
 
 import { EmbedItem } from '@/types/content';
 
-const Embed: FC<EmbedItem> = ({ url }) => {
+type Props = Omit<EmbedItem, 'type'>;
+const Embed: FC<Props> = ({ url }) => {
   const splitUrl = url.split('status/');
-  return <Tweet id={splitUrl[1]} />;
+  return (
+    <>
+      <Tweet id={splitUrl[1]} />
+    </>
+  );
 };
 
 export default Embed;

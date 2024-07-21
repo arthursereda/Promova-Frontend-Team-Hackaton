@@ -2,6 +2,7 @@ import { FC } from 'react';
 
 import { VideoItem } from '@/types/content';
 
-const Video: FC<VideoItem> = ({ id }) => <div id={id} />;
+type Props = Omit<VideoItem, 'type'>;
+const Video: FC<Props> = ({ id }) => <div id="vidazoo" />;
 
 export default Video;

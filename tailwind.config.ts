@@ -20,7 +20,17 @@ const config: Config = {
       addUtilities({
         '.scrollbar-custom': {
           '&::-webkit-scrollbar': {
-            display: 'none',
+            width: '8px',
+          },
+          '&::-webkit-scrollbar-track': {
+            background: 'transparent',
+          },
+          '&::-webkit-scrollbar-thumb': {
+            background: '#4A5568',
+            borderRadius: '4px',
+          },
+          '&::-webkit-scrollbar-thumb:hover': {
+            background: '#2D3748',
           },
         },
       });
