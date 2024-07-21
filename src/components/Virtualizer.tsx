@@ -26,7 +26,7 @@ const Virtualizer: FC<MapperProps> = ({ data }) => {
   const virtualizer = useWindowVirtualizer({
     count: data.length,
     estimateSize: () => 35,
-    overscan: 10,
+    overscan: 5,
     scrollMargin: parentRef.current?.offsetTop ?? 0,
   });
   const isShowVideo = useShowVideo();
