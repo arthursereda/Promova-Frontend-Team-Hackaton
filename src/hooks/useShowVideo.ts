@@ -1,20 +1,20 @@
 import { useEffect, useState } from 'react';
 
+import throttle from '@/utils/throttle';
+
 const useShowVideo = () => {
   const [isSetVidazoo, setIsSetVidazoo] = useState(false);
 
   useEffect(() => {
-    const listener = () => {
+    const listener = throttle(() => {
       const videoBlock = document.getElementById('vidazoo');
       if (videoBlock) {
         const { top, height } = videoBlock.getBoundingClientRect();
-        if (top + top - height > 0) {
-          setIsSetVidazoo(true);
-        } else {
-          setIsSetVidazoo(false);
-        }
+
+        setIsSetVidazoo(top + top - height > 0);
       }
-    };
+    }, 200);
+
     document.addEventListener('scroll', listener);
     return () => {
       document.removeEventListener('scroll', listener);
