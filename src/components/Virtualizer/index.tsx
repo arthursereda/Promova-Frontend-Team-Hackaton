@@ -15,6 +15,7 @@ interface MapperProps {
   data: DataItem[];
 }
 
+const SIZE_OFFSET_TO_FILL_PROGRESS = 720;
 const Virtualizer: FC<MapperProps> = ({ data }) => {
   const parentRef = useRef<HTMLDivElement | null>(null);
   useAutoScroll();
@@ -28,9 +29,9 @@ const Virtualizer: FC<MapperProps> = ({ data }) => {
   const isShowVideo = useShowVideo();
 
   let offset = virtualizer.scrollOffset || 0;
-  let size = virtualizer.getTotalSize();
+  let size = virtualizer.getTotalSize() - SIZE_OFFSET_TO_FILL_PROGRESS;
 
-  let scrollProgress = (offset / size) * 100;
+  let scrollProgress = (offset  / size) * 100;
 
   useEffect(() => {
     appendVidazoo('vidazoo');
