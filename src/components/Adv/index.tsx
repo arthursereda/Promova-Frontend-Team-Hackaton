@@ -1,9 +1,9 @@
 // Adv.js
-
 import { FC, useEffect } from 'react';
-import { AdvItem } from '@/types/content';
-import {addAdUnits, div_1_sizes, loadAd} from "@/test-fix";
 
+import { AdvItem } from '@/types/content';
+
+import { addAdUnits, div_1_sizes, loadAd } from '@/utils/advertisement';
 
 type Props = Omit<AdvItem, 'type'>;
 
@@ -21,10 +21,10 @@ const Adv: FC<Props> = ({ id, pbjsInstance }) => {
 
             // @ts-ignore
             const target = googletag
-                .pubads()
-                .getSlots()
-                // @ts-ignore
-                .find((slot) => slot.getSlotElementId() === id);
+              .pubads()
+              .getSlots()
+              // @ts-ignore
+              .find((slot) => slot.getSlotElementId() === id);
 
             // @ts-ignore
             target && googletag.pubads().refresh([target]);
