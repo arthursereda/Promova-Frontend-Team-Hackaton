@@ -7,9 +7,9 @@ import Progress from '@/components/Progress';
 import Switcher from '@/components/Switcher';
 import TopVideo from '@/components/TopVideo';
 
+import useAutoScroll from '@/hooks/useAutoScroll';
+import useShowVideo from '@/hooks/useShowVideo';
 import appendVidazoo from '@/utils/appendVidazoo';
-import useAutoScroll from '@/utils/useAutoScroll';
-import useShowVideo from '@/utils/useShowVideo';
 
 interface MapperProps {
   data: DataItem[];
@@ -57,6 +57,7 @@ const Virtualizer: FC<MapperProps> = ({ data }) => {
                   new ResizeObserver(() => virtualItem.measureElement(el)).observe(el);
                 }
               }}
+              data-item={virtualItem.index}
               style={{
                 position: 'absolute',
                 top: 0,
